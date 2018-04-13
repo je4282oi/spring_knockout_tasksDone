@@ -8,7 +8,7 @@ import static javax.persistence.GenerationType.*;
 @Entity
 public class Task {
     @Id
-    @GeneratedValue(strategy = AUTO)
+    @GeneratedValue(strategy = AUTO )
     private Long id;
 
     @Column(nullable = false)
