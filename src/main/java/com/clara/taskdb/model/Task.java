@@ -20,6 +20,7 @@ public class Task {
 
     public Task() {
         //Empty contructor needed by Json
+        //extra comment
     }
 
     public Task(String text, boolean urgent, boolean completed) {
