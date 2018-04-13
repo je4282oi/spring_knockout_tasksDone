@@ -1,7 +1,8 @@
 package com.clara.taskdb.repository;
 
+import com.clara.taskdb.model.Task;
 import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.scheduling.config.Task;
+
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
