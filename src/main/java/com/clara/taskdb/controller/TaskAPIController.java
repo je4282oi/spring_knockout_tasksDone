@@ -7,10 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -43,5 +40,20 @@ public class TaskAPIController {
     @GetMapping("/tasks")
     public ResponseEntity<List<Task>> queryTasks(){
         return new ResponseEntity<>(tasks.findAllByOrderByUrgentDesc(), HttpStatus.OK);
+    }
+
+    @PatchMapping(value= "/completed")
+    public ResponseEntity markTaskAsCompleted(@RequestBody Task task) {
+        int tasksUpdated = tasks.setTaskCompleted(task.isCompleted(), task.getId());
+        if (tasksUpdated ==0) {
+            return new ResponseEntity(HttpStatus.NOT_FOUND); //Error, task not in DB
+        }
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity deleteTask(@RequestBody Task task) {
+        tasks.delete(task);
+        return new ResponseEntity(HttpStatus.OK);
     }
 }
