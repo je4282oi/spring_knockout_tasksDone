@@ -13,7 +13,10 @@ import java.util.List;
 @Repository
 public interface TaskRepository extends PagingAndSortingRepository<Task, Long> {
     List<Task> findAllByOrderByUrgentDesc();
-
+    //Returns number of rows modified so
+    //If task is found and updated
+    //returns 1
+    //If task not in DataBase or no updates, returns 0
 
     @Transactional
     @Modifying

@@ -26,6 +26,8 @@ public class TaskAPIController {
         tasks.save(new Task("task 4", false, false));
     }
 
+    //Add a task typed into text field
+    //Post route = create a resource
     @PostMapping(value ="/add")
     public ResponseEntity addTask(@RequestBody Task task) {
         System.out.println("new task: " + task);
@@ -36,12 +38,15 @@ public class TaskAPIController {
         }
         return new ResponseEntity(HttpStatus.CREATED);
     }
-
+    //Route for getting all the tasks
+    //Get route = get a resource
     @GetMapping("/tasks")
     public ResponseEntity<List<Task>> queryTasks(){
         return new ResponseEntity<>(tasks.findAllByOrderByUrgentDesc(), HttpStatus.OK);
     }
 
+    //Route for showing completed tasks
+    //Patch route = update part of resource
     @PatchMapping(value= "/completed")
     public ResponseEntity markTaskAsCompleted(@RequestBody Task task) {
         int tasksUpdated = tasks.setTaskCompleted(task.isCompleted(), task.getId());
@@ -51,6 +56,8 @@ public class TaskAPIController {
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
+    //Route for deleting tasks (if task not present does nothing)
+    //Delete route = delete a resource
     @DeleteMapping(value = "/delete")
     public ResponseEntity deleteTask(@RequestBody Task task) {
         tasks.delete(task);
